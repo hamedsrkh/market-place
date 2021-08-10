@@ -2,7 +2,12 @@
 
 namespace App\Exceptions;
 
+use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Auth\AuthenticationException;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Http\Request;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -37,5 +42,38 @@ class Handler extends ExceptionHandler
         $this->reportable(function (Throwable $e) {
             //
         });
+    }
+
+    public function render($request, Throwable $exception)
+    {
+
+        if($request->ajax() || $request->wantsJson()){
+            if ($exception instanceof AuthenticationException) {
+                return response([
+                    'status' => 'false',
+                    'message' => 'authentication required'
+                ],401);
+            }
+            if ($exception instanceof AuthorizationException) {
+                return response([
+                    'status' => 'false',
+                    'message' => 'forbidden request'
+                ],403);
+            }
+            if ($exception instanceof ModelNotFoundException) {
+                return response([
+                    'status' => 'false',
+                    'message' => 'api parameter resource not found'
+                ],404);
+            }
+            if ($exception instanceof NotFoundHttpException) {
+                return response([
+                    'status' => 'false',
+                    'message' => 'url resource not found'
+                ],404);
+            }
+        }
+
+        return parent::render($request, $exception);
     }
 }
