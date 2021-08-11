@@ -1,0 +1,809 @@
+{
+	"info": {
+		"_postman_id": "4c8537fe-cbf2-4075-a7cb-6842c89842d2",
+		"name": "Market",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Authentication",
+			"item": [
+				{
+					"name": "Register",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();\r",
+									"\r",
+									"if(jsonData.data) pm.environment.set(\"access_token\", jsonData.data.access_token);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "hamed",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "ham.sarkhosh@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "123456789",
+									"type": "text"
+								},
+								{
+									"key": "password_confirmation",
+									"value": "123456789",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/{{api}}/{{version}}/register",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"{{api}}",
+								"{{version}}",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();\r",
+									"\r",
+									" \r",
+									"pm.environment.set(\"access_token\", jsonData.data.access_token);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "email",
+									"value": "admin@admin.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "12345678",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/{{api}}/{{version}}/login",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"{{api}}",
+								"{{version}}",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Logout",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/{{api}}/{{version}}/logout",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"{{api}}",
+								"{{version}}",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/{{api}}/{{version}}/user",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"{{api}}",
+								"{{version}}",
+								"user"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Admin",
+			"item": [
+				{
+					"name": "Seller",
+					"item": [
+						{
+							"name": "index",
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {
+									"accept": true
+								}
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{url}}/{{api}}/{{version}}/admin/sellers",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"{{api}}",
+										"{{version}}",
+										"admin",
+										"sellers"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "store",
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {
+									"accept": true
+								}
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "name",
+											"value": "test",
+											"type": "text"
+										},
+										{
+											"key": "email",
+											"value": "test2@test.com",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "12345678",
+											"type": "text"
+										},
+										{
+											"key": "store_name",
+											"value": "store_test",
+											"type": "text"
+										},
+										{
+											"key": "address",
+											"value": "tehran",
+											"type": "text"
+										},
+										{
+											"key": "latitude",
+											"value": "35.675120",
+											"type": "text"
+										},
+										{
+											"key": "longitude",
+											"value": "51.401953",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url}}/{{api}}/{{version}}/admin/sellers",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"{{api}}",
+										"{{version}}",
+										"admin",
+										"sellers"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "show",
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {
+									"accept": true
+								}
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{url}}/{{api}}/{{version}}/admin/sellers/32",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"{{api}}",
+										"{{version}}",
+										"admin",
+										"sellers",
+										"32"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update",
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {
+									"accept": true
+								}
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"test 23\",\r\n    \"email\": \"test@test.com\",\r\n    \"password\": \"12345678\",\r\n    \"store_name\": \"store 24\",\r\n    \"latitude\": 35.675120,\r\n    \"longitude\": 51.401953,\r\n    \"address\": \"tehran - tehran\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/{{api}}/{{version}}/admin/sellers/33",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"{{api}}",
+										"{{version}}",
+										"admin",
+										"sellers",
+										"33"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete",
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {
+									"accept": true
+								}
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{url}}/{{api}}/{{version}}/admin/sellers/32",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"{{api}}",
+										"{{version}}",
+										"admin",
+										"sellers",
+										"32"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Seller",
+			"item": [
+				{
+					"name": "Products",
+					"item": [
+						{
+							"name": "index",
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {
+									"accept": true
+								}
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{url}}/{{api}}/{{version}}/sellers/products",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"{{api}}",
+										"{{version}}",
+										"sellers",
+										"products"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "store",
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {
+									"accept": true
+								}
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "name",
+											"value": "product 1",
+											"type": "text"
+										},
+										{
+											"key": "price",
+											"value": "15000",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url}}/{{api}}/{{version}}/sellers/products",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"{{api}}",
+										"{{version}}",
+										"sellers",
+										"products"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "show",
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {
+									"accept": true
+								}
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{url}}/{{api}}/{{version}}/sellers/products/101",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"{{api}}",
+										"{{version}}",
+										"sellers",
+										"products",
+										"101"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update",
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {
+									"accept": true
+								}
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\"name\":\"product 11111\",\r\n\"price\":15000\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/{{api}}/{{version}}/sellers/products/101",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"{{api}}",
+										"{{version}}",
+										"sellers",
+										"products",
+										"101"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete",
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {
+									"accept": true
+								}
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{url}}/{{api}}/{{version}}/sellers/products/101",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"{{api}}",
+										"{{version}}",
+										"sellers",
+										"products",
+										"101"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Customer",
+			"item": [
+				{
+					"name": "nearby stores",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/{{api}}/{{version}}/stores/nearby?lat=35.675120&lng=51.401953",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"{{api}}",
+								"{{version}}",
+								"stores",
+								"nearby"
+							],
+							"query": [
+								{
+									"key": "lat",
+									"value": "35.675120"
+								},
+								{
+									"key": "lng",
+									"value": "51.401953"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "buy products",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/{{api}}/{{version}}/product/45/buy",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"{{api}}",
+								"{{version}}",
+								"product",
+								"45",
+								"buy"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
