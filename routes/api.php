@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\Admin\SellerController;
 use App\Http\Controllers\Api\AuthController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -24,6 +25,19 @@ Route::prefix('v1')->group(function (){
     Route::middleware(['auth:api'])->group(function (){
         Route::post('logout', [AuthController::class, 'logout']);
         Route::get('/user',[AuthController::class, 'user']);
+
+        Route::prefix('admin')->middleware('can:admin_all')->group(function (){
+            Route::apiResource('sellers', SellerController::class)->parameters([
+                'sellers' => 'user'
+            ]);
+        });
+
+        Route::prefix('sellers')->middleware('can:seller_all')->group(function (){
+
+
+        });
+
+
 
     });
 });

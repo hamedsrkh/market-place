@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Store;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,5 +15,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 //Route::get('/', function () {
-//    return view('welcome');
+//    dd(Store::factory()->make()->toArray());
+//    $user = \App\Models\User::find(1);
+//    $permissions = \App\Models\Permission::where('name','admin_all')->first();
+//    dd($user->hasPermission($permissions));
 //});

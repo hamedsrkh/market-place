@@ -3,7 +3,9 @@
 namespace Database\Seeders;
 
 use App\Models\Permission;
+use App\Models\Product;
 use App\Models\Role;
+use App\Models\Store;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 
@@ -47,7 +49,7 @@ class UserSeeder extends Seeder
         $seller_role->permissions()->attach($seller_permission->id);
 
 
-//        // admin user create
+       // admin user create
         $user = User::create([
             'name' => 'admin',
             'email' => 'admin@admin.com',
@@ -65,6 +67,10 @@ class UserSeeder extends Seeder
 
         // seller create
         User::factory()->count(10)->create()->each(function ($user) use ($seller_role) {
+            $store = $user->store()->create(Store::factory()->make()->toArray());
+            foreach (range(1,10) as $item){
+                $store->products()->create(Product::factory()->make()->toArray());
+            }
             $user->roles()->sync($seller_role->id);
         });
 

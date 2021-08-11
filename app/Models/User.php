@@ -58,6 +58,14 @@ class User extends Authenticatable
         return $this->belongsToMany(Permission::class);
     }
 
+    public function store(){
+        return $this->hasOne(Store::class);
+    }
+
+
+
+
+
     public function hasRole($roles)
     {
         return !! $roles->intersect($this->roles)->all();
@@ -67,4 +75,5 @@ class User extends Authenticatable
     {
         return $this->permissions->contains('name' , $permission->name) || $this->hasRole($permission->roles);
     }
+
 }

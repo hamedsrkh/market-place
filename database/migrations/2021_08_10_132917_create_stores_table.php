@@ -18,8 +18,8 @@ class CreateStoresTable extends Migration
             $table->string('name');
             $table->unsignedInteger('user_id');
             $table->string('address')->nullable();
-            $table->unsignedInteger('latitude')->nullable();
-            $table->unsignedInteger('longitude')->nullable();
+            $table->integer('latitude')->nullable();
+            $table->integer('longitude')->nullable();
             $table->timestamps();
         });
     }
