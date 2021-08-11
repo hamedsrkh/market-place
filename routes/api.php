@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\Admin\SellerController;
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\ProductController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -33,8 +34,7 @@ Route::prefix('v1')->group(function (){
         });
 
         Route::prefix('sellers')->middleware('can:seller_all')->group(function (){
-
-
+            Route::apiResource('products', ProductController::class);
         });
 
 
