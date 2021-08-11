@@ -28,8 +28,8 @@ class StoreFactory extends Factory
         return [
             'name' => $this->faker->company(),
             'address' => $this->faker->address(),
-            'latitude' => $this->faker->latitude(35.675120,35.720002),
-            'longitude' => $this->faker->longitude(51.401953, 51.403968),
+            'latitude' => $this->faker->randomFloat(6,35.720002,35.675120,),
+            'longitude' => $this->faker->randomFloat(6,51.403968,51.401953, ),
         ];
     }
 }

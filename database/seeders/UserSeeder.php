@@ -66,7 +66,7 @@ class UserSeeder extends Seeder
             ->create();
 
         // seller create
-        User::factory()->count(10)->create()->each(function ($user) use ($seller_role) {
+        User::factory()->count(30)->create()->each(function ($user) use ($seller_role) {
             $store = $user->store()->create(Store::factory()->make()->toArray());
             foreach (range(1,10) as $item){
                 $store->products()->create(Product::factory()->make()->toArray());
